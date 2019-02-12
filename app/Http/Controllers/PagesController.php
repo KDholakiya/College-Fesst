@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Data;
 
 class PagesController extends Controller{
     public function index(){
-        return view('pages.index')->with('page', 'HOME...');;
+        $eves=Data::all();
+        return view('pages.index')->with('eves',$eves);
     }
     public function about(){
         $data = array(

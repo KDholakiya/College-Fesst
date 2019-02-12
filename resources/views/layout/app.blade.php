@@ -6,6 +6,7 @@
 
         <title>{{config('app.name', 'CollegeFest')}}</title>
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
         <script src="{{asset('js/app.js')}}"></script>
     </head>
     <body>
@@ -14,4 +15,6 @@
             @yield('content')
         </div>
     </body>
+    <script src="{{asset('js/script.js')}}"></script>
+
 </html>
