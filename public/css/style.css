@@ -1,3 +1,16 @@
+
+
+.navbar-brand{
+    text-align: center;
+    width: 100%;
+}
+#searchForm{
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+}
+.card{
+    margin-bottom: 10px !important;
+}
 .card:hover,
 .card:focus{
     transform: translateY(-0.25em);

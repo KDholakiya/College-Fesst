@@ -13,4 +13,5 @@
 
 Route::get('/','PagesController@index');
 Route::get('/about','PagesController@about');
-Route::resource('api', 'DataController');
+Route::get('/Search/{data?}', 'PagesController@search')->where('data', '(.*)');
+Route::get('/{data?}', 'PagesController@gallery')->where('data', '(.*)');
