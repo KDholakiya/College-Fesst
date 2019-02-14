@@ -20,3 +20,4 @@ $(document).ready(function () {
 function search(arg) {
     window.location="/Search/"+arg;
 }
+baguetteBox.run('.grid-gallery', { animation: 'slideIn'});

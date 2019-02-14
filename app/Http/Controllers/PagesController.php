@@ -18,9 +18,8 @@ class PagesController extends Controller{
         return view('pages.about')->with($data);;
     }
     public function gallery($eve){
-        $data = Data::where('title', 'like', $eve)->get();
+        $data=json_decode(Data::where('title', 'like', $eve)->get(),true)[0];
         $images = \File::allFiles(public_path('Data/'.$eve));
-        //print_r($images);
         return view('pages.gallery',compact('data','images'));
     }
     public function search($query){
