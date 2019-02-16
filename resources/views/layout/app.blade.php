@@ -15,9 +15,10 @@
     </head>
     <body>
         @include('inc.navbar')
-        <div class="container">
+        <div class="container wrapper">
             @yield('content')
         </div>
+        @include('inc.modal')
         @include('inc.footer')
     </body>
     <script src="{{asset('js/script.js')}}"></script>

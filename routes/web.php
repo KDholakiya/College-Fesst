@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/','PagesController@index');
-Route::get('/about','PagesController@about');
-Route::get('/Search/{data?}', 'PagesController@search')->where('data', '(.*)');
-Route::get('/{data?}', 'PagesController@gallery')->where('data', '(.*)');
+Route::get('/','PagesController@index');//index page
+Route::get('/about','PagesController@about');//about page
+Route::get('/Search/{data?}', 'PagesController@search')->where('data', '(.*)');//search query
+Route::get('/event/{data?}', 'PagesController@gallery')->where('data', '(.*)');//gallery page
+Route::resource('Data', 'DataController');

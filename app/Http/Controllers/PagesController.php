@@ -19,7 +19,7 @@ class PagesController extends Controller{
     }
     public function gallery($eve){
         $data=json_decode(Data::where('title', 'like', $eve)->get(),true)[0];
-        $images = \File::allFiles(public_path('Data/'.$eve));
+        $images = \File::allFiles(public_path('asset/'.$eve));
         return view('pages.gallery',compact('data','images'));
     }
     public function search($query){

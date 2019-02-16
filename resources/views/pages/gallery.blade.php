@@ -8,7 +8,7 @@
         </div>
         <div class="gallery" id="gallery">
                 @foreach($images as $image)
-                <?php $path = "Data/".explode('Data', $image->getRealPath())[1]; ?>
+                <?php $path = URL::asset('/asset/'.explode('asset', $image->getRealPath())[1]) ?>
                 <div class="mb-3 item">
                     <a class="lightbox" href="{{$path}}">
                         <img class="img-fluid image scale-on-hover" src="{{$path}}">
