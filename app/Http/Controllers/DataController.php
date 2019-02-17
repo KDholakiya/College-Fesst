@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Data;
 use App\Members;
-use Config\Session;
+use Session;
 class DataController extends Controller
 {
     /**
@@ -35,18 +35,24 @@ class DataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        
+    }
+    public function authenticateMember(Request $request){
         $this->validate($request,[
             'username'=>'required',
             'password'=>'required'
         ]);
         $member = Members::where([
-                    ['username','=', $request['username']],
-                    ['password','=',$request['password']]
-                ])->exists();
+            ['username','=', $request['username']],
+            ['password','=',$request['password']]
+        ])->exists();
         if($member){
             Session::put('member', $request['username']);
+            return redirect('dashboard');
         }
-        else return redirect()->back();
+        else {
+            return '<script>alert("in Valid");</script>'.redirect()->back();
+        }
     }
 
     /**

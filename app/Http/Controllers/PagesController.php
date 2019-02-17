@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Data;
 
 class PagesController extends Controller{
+
     public function index(){
         $eves=Data::all();
         return view('pages.index')->with('eves',$eves);
@@ -15,7 +16,7 @@ class PagesController extends Controller{
             'title' => 'ABOUT US',
             'arr'=>['a','b','c','d']
         );
-        return view('pages.about')->with($data);;
+        return view('pages.about')->with($data);
     }
     public function gallery($eve){
         $data=json_decode(Data::where('title', 'like', $eve)->get(),true)[0];

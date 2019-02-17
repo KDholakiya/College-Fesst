@@ -18,7 +18,9 @@
         <div class="container wrapper">
             @yield('content')
         </div>
-        @include('inc.modal')
+        @if (Request::path() != 'dashboard')
+            @include('inc.modal')
+        @endif
         @include('inc.footer')
     </body>
     <script src="{{asset('js/script.js')}}"></script>

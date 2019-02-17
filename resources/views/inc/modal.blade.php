@@ -10,7 +10,7 @@
       <div class="modal-body">
             {{-- @include('inc.messages') --}}
             
-            {!! Form::open(['action' => 'DataController@store','method'=>'POST','id'=>'form']) !!}
+            {!! Form::open(['action' => 'DataController@authenticateMember','method'=>'POST','id'=>'form']) !!}
                 <div class="form-group">
                         {{Form::label('username', 'Username')}}
                         {{Form::text('username', '',['class'=>'form-control','placeholder'=>'kevald47','required'])}}
