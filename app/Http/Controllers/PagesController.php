@@ -27,4 +27,8 @@ class PagesController extends Controller{
         $eves = Data::where('title', 'like', '%'.$query.'%')->get();
         return view('pages.index')->with('eves',$eves);
     }
+    public function member(){
+        $events=Data::select('id','title','photos')->get();
+        return view('pages.dashboard')->with('events',$events);
+    }
 }

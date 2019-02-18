@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Data;
 use App\Members;
 use Session;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 class DataController extends Controller
 {
     /**
@@ -35,8 +36,40 @@ class DataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        
+        $this->validate($request, [
+            'files' =>'max:20',
+            'title' => 'required',
+            'venue' => 'required',
+            'info' => 'required',
+            'files.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        if(!is_dir('asset/'.$request['title'])){
+            mkdir('asset/'.$request['title']);
+        }
+        foreach($request->file('files') as $image){
+            $name=$image->getClientOriginalName();
+            $path=public_path().'/asset/'.$request['title'];
+            $image->move($path, $name); 
+            $data[] = $name;   
+        }
+        $query=Data::insert([
+            [
+                'title' => $request['title'], 
+                'venue' => $request['venue'],
+                'info' => $request['info'],
+                'featuredPhoto' => $data[0],
+                'photos' => 'Data/'.$request['title'],
+            ],
+        ]);
+        $request['files']=$data;
+        if($query){
+            return redirect()->back();
+        }else{
+            return "Data Not Instered Some Error Occured";
+        }
     }
+
+
     public function authenticateMember(Request $request){
         $this->validate($request,[
             'username'=>'required',

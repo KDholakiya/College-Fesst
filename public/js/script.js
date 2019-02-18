@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $(".card").click(function (e) {
+    $(".cardC").click(function (e) {
         e.preventDefault();
         title=$("#"+$(this).attr('id')+" #title").html();
-        window.location="/event/"+title;
+        gotoGallary(title);
     });
     $("#search").keyup(function (e) {
         e.preventDefault();
@@ -21,10 +21,20 @@ $(document).ready(function () {
         if( ($.trim( $('#username').val()) == "") || ($.trim($('#password').val()) == "") ) return;
         $('#form').submit();
     });
+    $('#uploadEvent').click(function (e){
+        console.log('form uploading');
+        $('#eventUploadForm').submit();
+    });
 });
+function gotoGallary(title){
+    if(title != undefined) window.location="/event/"+title;
+}
 function search(arg) {
     arg=$.trim(arg);
     if(arg=="") return;
     window.location="/Search/"+arg;
+}
+function removeEvent($id){
+    alert($id);
 }
 baguetteBox.run('.grid-gallery', { animation: 'slideIn'});
