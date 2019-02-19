@@ -35,6 +35,10 @@ function search(arg) {
     window.location="/Search/"+arg;
 }
 function removeEvent($id){
-    alert($id);
+    $.post("/delete", $id,
+        function (data) {
+            console.log(data)
+        }
+    );
 }
 baguetteBox.run('.grid-gallery', { animation: 'slideIn'});

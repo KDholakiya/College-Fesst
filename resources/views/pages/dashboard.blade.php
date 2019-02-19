@@ -17,14 +17,16 @@
                <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{$event['title']}}
                     <div>
-
-                    <button title="Remove this Event" id={{'event'.$event['id']}} onclick="removeEvent({{$event['id']}})" type="button" class="btn btn-sm btn-outline-danger">
-                        <i class="fa fa-trash fa-lg"></i>
-                    </button>
-                    <button title="See Gallary" onclick="gotoGallary('{{$event['title']}}')" type="button" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-eye fa-lg"></i>
-                    </button>
-                    <div>
+                            {!! Form::open(['method' => 'Delete', 'route' => ['Data.destroy', $event['id']],'class'=>'inline']) !!}
+                                <button title="Remove this Event"  type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa fa-trash fa-lg"></i>
+                                </button>
+                            {!! Form::close() !!}
+                        
+                        <button title="See Gallary" onclick="gotoGallary('{{$event['title']}}')" type="button" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-eye fa-lg"></i>
+                        </button>
+                    </div>
                 </li> 
             @endforeach
         </ul> 
@@ -47,7 +49,8 @@
                 </div>
 
                 <div class="modal-body">
-                    {!! Form::open(['action' => 'DataController@store','method'=>'POST','id'=>'eventUploadForm','files' => true,'enctype'=>'multipart/form-data']) !!}
+                    {{-- {!! Form::open(['action' => 'DataController@addEvent','method'=>'POST','id'=>'eventUploadForm','files' => true,'enctype'=>'multipart/form-data']) !!} --}}
+                    {!! Form::open(['url' => '','method'=>'POST','id'=>'eventUploadForm','files' => true,'enctype'=>'multipart/form-data']) !!}
                         <div class="form-group">
                                 {{Form::label('title', 'Title')}}
                                 {{Form::text('title', '',['class'=>'form-control','placeholder'=>'Business Fiesta','required'])}}

@@ -7,37 +7,15 @@ use App\Data;
 use App\Members;
 use Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-class DataController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+class DataController extends Controller{
+    public function index() {
         return Data::all();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return 'create callded';
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
+    public function addEvent(Request $request){
         $this->validate($request, [
-            'files' =>'max:20',
+            'files' =>'max:150',
             'title' => 'required',
             'venue' => 'required',
             'info' => 'required',
@@ -46,11 +24,11 @@ class DataController extends Controller
         if(!is_dir('asset/'.$request['title'])){
             mkdir('asset/'.$request['title']);
         }
+        $path=public_path().'/asset/'.$request['title'];
         foreach($request->file('files') as $image){
             $name=$image->getClientOriginalName();
-            $path=public_path().'/asset/'.$request['title'];
-            $image->move($path, $name); 
-            $data[] = $name;   
+            $image->move($path, $name);
+            $data[] = $name; 
         }
         $query=Data::insert([
             [
@@ -69,7 +47,6 @@ class DataController extends Controller
         }
     }
 
-
     public function authenticateMember(Request $request){
         $this->validate($request,[
             'username'=>'required',
@@ -87,49 +64,17 @@ class DataController extends Controller
             return '<script>alert("in Valid");</script>'.redirect()->back();
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function destroy($id){ 
+        if(! (Session::has('member')) ) return redirect()->back();
+        $title=Data::where('id','=',$id)->select('title')->get()->first();
+        File::deleteDirectory(public_path().'/asset/'.$title['title']);
+        $query=Data::where('id', '=', $id)->delete();
+        if($query) return redirect()->back();
+        else return $title.' IS NOT DELETED';
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    public function create() { }
+    public function show($id){ }
+    public function edit($id){ }
+    public function update(Request $request, $id){ }
 }

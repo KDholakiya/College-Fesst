@@ -5,7 +5,7 @@
                 <button id="logout" type="button" class="btn btn-outline-warning btn-xs">Logout</button>
             </a>
         @else
-            <button data-toggle="modal" data-target="#modal" type="button" id="upload" class=" footerbtn btn btn-outline-warning btn-xs">Upload Event</button>
+            <button data-toggle="modal" data-target="#modal" type="button" id="upload" class=" footerbtn btn btn-outline-warning btn-xs">Manage Events</button>
         @endif
         <div class="text-center py-3">
             ©2019 Copyright:
