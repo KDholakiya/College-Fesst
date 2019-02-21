@@ -1,6 +1,11 @@
 
 
-
+ @import url('https://fonts.googleapis.com/css?family=Allura');
+ .titleText{
+    font-family: 'Allura', 'Nunito', sans-serif;
+    font-size: 3em;
+ }
+ .titleText:hover {text-decoration: none; }
 .loader {
     display:    none;
     position:   fixed;
@@ -9,7 +14,9 @@
     left:       0;
     height:     100%;
     width:      100%;
-    background: rgba( 255, 255, 255, .8 )  url('http://i.stack.imgur.com/FhHRx.gif')  50% 50%  no-repeat;
+    background: rgba( 255, 255, 255, .8 )  
+                url('http://i.stack.imgur.com/FhHRx.gif')  
+                50% 50%  no-repeat;
 }
 .noEve{
     position: absolute;

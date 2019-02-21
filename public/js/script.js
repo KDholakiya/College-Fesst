@@ -22,8 +22,30 @@ $(document).ready(function () {
         $('#form').submit();
     });
     $('#uploadEvent').click(function (e){
-        console.log('form uploading');
-        $('#eventUploadForm').submit();
+        var formData=new FormData($('#eventUploadForm')[0]);
+        $('.loader').css('display', 'block');
+        $.ajax({
+            type: "POST",
+            url: "/addEvent",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if(response=='true'){
+                    location.reload(); 
+                }else{
+                    alert("Whoops.. Event Not Uploaded Some Error Occured")
+                }
+            },
+            complete:function (){
+                $('.loader').css('display', 'none');
+            },
+            fail:function(response){
+                alert("Whoops.. Event Not Uploaded Some Error Occured")
+            }
+        });
+    //    $('#eventUploadForm').submit();
     });
 });
 function gotoGallary(title){

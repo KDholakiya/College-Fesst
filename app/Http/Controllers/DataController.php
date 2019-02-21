@@ -16,10 +16,11 @@ class DataController extends Controller{
     public function addEvent(Request $request){
         $this->validate($request, [
             'files' =>'max:150',
+            'files' =>'required',
             'title' => 'required',
             'venue' => 'required',
             'info' => 'required',
-            'files.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'files.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10480'
         ]);
         if(!is_dir('asset/'.$request['title'])){
             mkdir('asset/'.$request['title']);
@@ -41,9 +42,9 @@ class DataController extends Controller{
         ]);
         $request['files']=$data;
         if($query){
-            return redirect()->back();
+            return 'true';
         }else{
-            return "Data Not Instered Some Error Occured";
+            return 'false';
         }
     }
 
